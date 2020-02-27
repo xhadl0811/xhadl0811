@@ -32,7 +32,7 @@ public class UpdateController {
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 	
-	@GetMapping("/mypage/changeEmail")
+	@GetMapping("/mypage/changeEmail") 
 	public String changeIdPage() {
 		return "update/changeEmail";
 	}
@@ -73,7 +73,7 @@ public class UpdateController {
 			@ModelAttribute ("originalPW") String originalPW,
 			@ModelAttribute ("newPW1") String newPW1,
 			@ModelAttribute ("newPW2") String newPW2){ //기존비밀번호  - 새 비번 - 재확인
-		if(newPW1==null) {
+		if(newPW1==null) { //nullexception떠가지고 먼저 null 인지 확인 
 			flash.addFlashAttribute("errorMSG","변경할 비밀번호를 입력해주세요.");
 			return "redirect:/mypage/changePW";
 		}
@@ -115,11 +115,10 @@ public class UpdateController {
 	
 	
 	@GetMapping("mypage/withdraw")
-	public String withdrawPage(Principal pri,HttpSession session) { //이메일 - 비밀번호 - 탈퇴
+	public String withdrawPage(Principal pri,HttpSession session) { //회원탈퇴 버튼누르면 즉시 삭제
 		uMapper.deleteUserByEmail(pri.getName());
 		uMapper.deleteAuthorities(pri.getName());
-
-		System.out.println(pri.getName()+" 	is withdraw");
+		System.out.println(pri.getName()+"is withdraw");
 		session.invalidate(); 
 		return "redirect:/";
 	}
