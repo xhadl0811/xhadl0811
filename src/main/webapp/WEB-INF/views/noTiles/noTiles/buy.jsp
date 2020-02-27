@@ -57,7 +57,7 @@
 <script>
 	$('.pay').click(function pay(){
 		var IMP = window.IMP;
-		IMP.init('imp11897589');
+		IMP.init('키');
 		IMP.request_pay({
 		pg: 'kakaopay',
 		pay_method: 'card',
