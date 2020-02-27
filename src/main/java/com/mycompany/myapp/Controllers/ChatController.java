@@ -26,9 +26,9 @@ public class ChatController {
 	}
 	
 	
-	@PreAuthorize("this.isExist(#target) and (authentication.principal.username!=#target)")
+	@PreAuthorize("this.isExist(#target) and (authentication.principal.username!=#target)") //대화상대가 존재하는지 , 대화 상대가 본인이 아닌지 확인 
 	@RequestMapping("/chat")
-	public String chat(@RequestParam(value="target", required=true) String target,
+	public String chat(@RequestParam(value="target", required=true) String target,  //채팅 페이지로 넘어감
 			HttpServletRequest request , Principal principal,Model model) {
 		List<String> room = uMapper.getRoom(principal.getName());
 		if (!room.contains(target))
@@ -41,10 +41,10 @@ public class ChatController {
 		return "/chat";
 	}
 	
-	@RequestMapping("/chatList")
+	@RequestMapping("/chatList") // 채팅중인 채팅방 목록
 	public String chatList(Principal pri,Model model) {
-		List<String> emailList = uMapper.getRoom(pri.getName());
-		List<String> nicknameList = new ArrayList<>();
+		List<String> emailList = uMapper.getRoom(pri.getName()); 
+		List<String> nicknameList = new ArrayList<>();  //이메일은 채팅페이지로 넘어가기 위함, 닉네임은 
 		for(String room: emailList) {
 			nicknameList.add(uMapper.getNickname(room));
 		}
