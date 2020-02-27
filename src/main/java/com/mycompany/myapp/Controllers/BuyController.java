@@ -26,19 +26,19 @@ public class BuyController{
 		return !pMapper.isSelling(id)||!pri.equals(pMapper.getAuthor(id));		
 	}
 	
-	@PreAuthorize("this.checkisSelling(#id,authentication.principal.username)")
+	@PreAuthorize("this.checkisSelling(#id,authentication.principal.username)") //상품이 판매되었는지 , 자기 자신의 상품인지 확인
 	@RequestMapping(value = "/buy/product/{id}",method=RequestMethod.GET)
-	public String buyingPage(@PathVariable int id ,Model model,
+	public String buyingPage(@PathVariable int id ,Model model,   //상품 구매 화면
 			Principal principal) {		
-		    Product product = pMapper.getListById(id);
-		    model.addAttribute("product",product);
-			return "/noTiles/noTiles/buy";
+		Product product = pMapper.getListById(id);
+		model.addAttribute("product",product);
+	    return "/noTiles/noTiles/buy";
 	}
 	
-	@RequestMapping(value="/successPay" , method=RequestMethod.GET)
+	@RequestMapping(value="/successPay" , method=RequestMethod.GET) //결제 성공 시 보여질 페이지(jquery에서 성공시 성공세션 줌)
 	public String successPay(@ModelAttribute("id") int id , 
 			Model model ,Principal pri , HttpServletRequest request)  {		
-		Boolean isSuccess = (Boolean)request.getSession().getAttribute("isSuccess");
+		Boolean isSuccess = (Boolean)request.getSession().getAttribute("isSuccess"); //
 		if(isSuccess == null ) // 결제 미완료 
 			return "redirect:/";		
 		request.getSession().removeAttribute("isSuccess");
