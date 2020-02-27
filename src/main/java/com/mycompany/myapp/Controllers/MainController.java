@@ -75,10 +75,9 @@ public class MainController {
 	
 	@RequestMapping(value="/addProduct" , method=RequestMethod.GET)
 	public String addProduct(Model model) {
-			if(!model.containsAttribute("pd")) {
+			if(!model.containsAttribute("pd")) { //폼 검증이 실패했는지
 				model.addAttribute("product",new Product());
-			}
-			
+			}		
 		return "/addProduct";
 	}
 	
@@ -89,7 +88,7 @@ public class MainController {
 			 RedirectAttributes flash,Principal principal,
 			 @RequestParam("file11") MultipartFile file1,
 			 @RequestParam("file22") MultipartFile file2,
-			 @RequestParam("file33") MultipartFile file3) {	
+			 @RequestParam("file33") MultipartFile file3) {	//폼 검증
 		
 		if(result.hasErrors()) { //에러발생
 			flash.addFlashAttribute("org.springframework.validation.BindingResult.product",result);
@@ -105,7 +104,7 @@ public class MainController {
 		product.setAuthor(principal.getName());
 		product.setNickname(uMapper.getNickname(principal.getName()));
 		
-		timeHelper tHelper = new timeHelper();
+		timeHelper tHelper = new timeHelper(); //시간 저장
 		product.setTime(tHelper.getTime());
 			
 		System.out.println(product.toString());
@@ -119,7 +118,7 @@ public class MainController {
 	
 
 	@RequestMapping(value="/product/{id}" , method=RequestMethod.GET)
-	public String productInfo(@PathVariable int id , Model model) {
+	public String productInfo(@PathVariable int id , Model model) { //상품 
 		Product product = pMapper.getListById(id);
 		if(product.getDescription()!=null) { // db에서 view로 뿌려줄때 줄바꿈처리
 			product.setDescription(product.getDescription().replace("\r\n","<br/>"));
