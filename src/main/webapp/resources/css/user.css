@@ -1,0 +1,47 @@
+.outOfBox{
+	
+	text-align:center;
+	min-width:700px;
+	margin-top:30px;
+}
+
+.loginBox{
+	background-color:#F9F9F9;		
+	display:inline-block;
+	width:700px;
+	height:320px;
+	border:1px solid gray;
+	text-aligin:center;	
+	padding:50px;
+}
+
+.input{
+	width:420px;
+	height:45px;
+	
+}
+
+.login{
+	cursor:pointer;
+	padding-bottom:7px;
+	margin-top:7px;
+	width:420px;
+	height:45px;	
+	box-shadow:none;
+	display:inline-block;
+	color:white;
+	background-color:#09538D;
+
+}
+#login:hover{
+	background-color:#063B65;
+}
+
+.error{
+	
+	border-radius:10px;
+	color:red;
+	font-size:18px;
+	display:inline-block;
+	
+}

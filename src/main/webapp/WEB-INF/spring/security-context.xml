@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+	
+	<bean id="SuccessHandler" class="com.mycompany.myapp.LoginHandler.SuccessHandler" />
+
+	<bean id="FailureHandler" class="com.mycompany.myapp.LoginHandler.FailureHandler" >
+		<property name="loginidname" value="email" />
+		<property name="loginpwdname" value="password" />
+		<property name="errormsgname" value="ERRORMSG" />
+		<property name="defaultFailureUrl" value="/login?error" />
+	</bean>
+
+	    <sec:http pattern="/**/*.js" security="none" />
+		<sec:http pattern="/**/*.css" security="none" />
+		<sec:http pattern="/**/*.jpg" security="none" />
+		<sec:http pattern="/**/*.png" security="none" />
+
+   		 <sec:http auto-config='true' use-expressions="true">
+   			 <sec:session-management ><!-- 세션 종료 -->
+			 <sec:concurrency-control max-sessions="1" expired-url="/"/><!-- 중복로그인 -->
+			 </sec:session-management> 
+       		 <sec:intercept-url pattern="/login" access="isAnonymous()" />
+       		 <sec:intercept-url pattern="/logout" access="isAuthenticated()"/>
+       		 <sec:intercept-url pattern="/chatList" access="isAuthenticated()" />
+       		 <sec:intercept-url pattern="/chat" access="isAuthenticated()" />	
+       		 <sec:intercept-url pattern="/signup" access="isAnonymous()" />
+       		 <sec:intercept-url pattern="/chat" access="isAuthenticated()" />
+       		 <sec:intercept-url pattern="/mypage" access="isAuthenticated()" />
+       		 <sec:intercept-url pattern="/mypage/**" access="isAuthenticated()" />
+       		 <sec:intercept-url pattern="/buy/**" access="isAuthenticated()" />
+			 <sec:intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+			 <sec:intercept-url pattern="/product/edit/**" access="isAuthenticated()" />
+			 <sec:intercept-url pattern="/product/delete/**" access="isAuthenticated()" />
+			 <sec:intercept-url pattern="/addProduct" access="isAuthenticated()" />	
+       		 <sec:intercept-url pattern="/**" access="permitAll()" />
+   
+        <sec:form-login login-page="/login?need=true"
+                        login-processing-url="/user/login"
+                        authentication-success-handler-ref="SuccessHandler"                   
+                        username-parameter="email" 
+                        password-parameter="password"
+                        authentication-failure-handler-ref="FailureHandler" 
+                        />
+        <sec:logout invalidate-session="true"
+                    logout-url="/logout" 
+                  	logout-success-url="/"
+                     />
+        <!-- enable csrf protection -->
+        <sec:csrf/>
+    </sec:http>
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+             <sec:jdbc-user-service data-source-ref="dataSource"
+                users-by-username-query="SELECT email, password, enabled FROM user WHERE email = ?"
+                authorities-by-username-query="SELECT email, authority FROM shop_authorities WHERE email = ?" />
+       </sec:authentication-provider>
+    </sec:authentication-manager>
+    
+</beans>

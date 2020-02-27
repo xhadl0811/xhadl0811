@@ -1,0 +1,9 @@
+@charset "EUC-KR";
+body{
+	margin:0px;
+	min-width:800px;
+}
+
+.content{
+	paddig-top:8.5%;
+}

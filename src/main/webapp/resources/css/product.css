@@ -1,0 +1,28 @@
+#productInfo{
+	border:1px solid gray;
+	padding:7px;
+	background-color:#F9F9F9;
+	margin-top:10px;
+}
+#des{
+	padding:15px;
+	border-top:1px solid gray;
+	margin-bottom:300px;	
+}
+#return{
+	font-size:30px;
+	cursor:pointer;
+	background-color:white;
+	width:265px;
+	height:130px;
+	border:3px solid black;
+	border-radius:5px;
+}
+
+.buyButton{
+	margin:right:30px;
+	text-decoration:none;
+	border:0.5px solid gray;
+	color:black;	
+	
+}

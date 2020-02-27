@@ -1,0 +1,44 @@
+.addName{
+			padding:10px;
+			font-size:15px;
+			margin-bottom:15px;
+			border:3px solid black;
+			border-radius:5px;
+			
+			width:500px;
+			height:30px;
+		}
+		.addPrice{
+			padding:10px;
+			font-size:15px;
+			margin-bottom:15px;
+			width:500px;
+			height:30px;
+			border:3px solid black;
+			border-radius:5px;
+		}
+		.addDes{
+			resize:none;
+			padding:10px;
+			font-size:15px;
+			border:3px solid black;
+			border-radius:5px;
+			width:500px;
+			height:600px;
+		}	
+		.submit{
+			cursor:pointer;
+			background-color:white;
+			width:65px;
+			height:30px;
+			border:3px solid black;
+			border-radius:5px;
+		}
+		.addCategory{
+			margin:3px;	
+			padding-left:3px;
+			height:35px;
+			font-size:14px;
+			border:3px solid black;
+			border-radius:5px;
+		}

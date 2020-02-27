@@ -1,0 +1,36 @@
+.indexButton{	
+	display:inline-block;
+	text-align:center;
+	text-decoration:none;
+	width:100px;
+	height:30px;
+	border:1px solid black;
+	margin-left:9px;
+	color:black;
+}
+
+.indexButton:hover{
+	background-color:#F7EBEB;
+}
+
+
+#addProductBOX{
+	text-decoration:none;
+	text-align:right;
+}
+
+.addProduct{
+	display:inline-block;
+	text-align:center;
+	text-decoration:none;
+	width:200px;
+	height:30px;
+	border:1px solid black;
+	margin-right:3px;
+	color:black;
+	
+}
+
+.addProduct:hover{
+	background-color:#EDF7EB;
+}
