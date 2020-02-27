@@ -33,17 +33,17 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
             Authentication authentication) throws IOException, ServletException {
        if(request.getSession()!=null) {  	 
     	   String referer=(String) request.getSession().getAttribute("referer");
-    	if(request.getSession().getAttribute("need")=="true") {
+    	if(request.getSession().getAttribute("need")=="true") {   //가려던 페이지가 있으면 requestCache로 보냄
     		 SavedRequest savedRequest = requestCache.getRequest(request, response); 
              String targetUrl = savedRequest.getRedirectUrl();
              System.out.println(targetUrl);
              redirectStratgy.sendRedirect(request, response, targetUrl);
     	}
-        else if(referer!=null) {
+        else if(referer!=null) { //이전페이지로
         	redirectStratgy.sendRedirect(request, response, referer);
         	request.getSession().removeAttribute("referer");
         }
-        else 
+        else //
         	redirectStratgy.sendRedirect(request, response, "/");   	
          
     }
