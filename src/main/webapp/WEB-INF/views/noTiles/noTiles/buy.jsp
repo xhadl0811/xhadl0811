@@ -63,11 +63,11 @@
 		pay_method: 'card',
 		merchant_uid: 'merchant_' + new Date().getTime(),
 		name: '상품판매사이트 - ${product.name}',
-		amount: '800000',
+		amount: '999999',
 		buyer_email: '${product.author}',
 		buyer_name: '${product.nickname}',
-		buyer_tel: '010-8344-3105',
-		buyer_addr: '우진이네',
+		buyer_tel: '010-1234-5678',
+		buyer_addr: 'home',
 		buyer_postcode: '123-456',
 		m_redirect_url: 'https://www.naver.com/'
 		
@@ -75,7 +75,7 @@
 		if (rsp.success) {
 			const paymentData = getPaymentData.data.response; // 조회한 결제 정보
 			const {amount, status} = paymentData;
-			if(amount === 800000){			
+			if(amount === 999999){			
 				<% session.setAttribute("isSuccess",true); %>		
 				window.location.replace("http://localhost:8085/myapp/successPay?id=${id}") ;	
 				var msg = '결제가 완료되었습니다.';
@@ -86,7 +86,7 @@
 			}
 			else{
 				alert("비정상적인 접근입니다.")
-				location.href="http://localhost:8085/myapp/";
+				location.href="https://localhost:8443/myapp/";
 			}
 		} else {
 		var msg = '결제에 실패하였습니다.';
