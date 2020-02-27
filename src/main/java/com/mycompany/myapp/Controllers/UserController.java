@@ -40,15 +40,15 @@ public class UserController {
 	@RequestMapping(value="login")
 	public String loginPage(HttpServletRequest request ,HttpServletResponse response,
 			@RequestParam(value="need",defaultValue="false	") Boolean need) throws IOException {		
-		if(need==true) {
-			request.getSession().setAttribute("need","true");
-	        response.setContentType("text/html; charset=UTF-8");
-	        PrintWriter out = response.getWriter();
-	        out.println("<script>alert('로그인이 필요한 서비스입니다.');</script>");
-	        out.flush();
-	        return "/login";
+		if(need==true) { //만약 , 로그인이 필요한 url에 들어왔을때 /login?need=true 로 들어오게함(security interceptor)
+			request.getSession().setAttribute("need","true"); //로그인 성공 시 원래 가고자했던 페이지로 넘겨주기 위함(requestCache)
+	       		response.setContentType("text/html; charset=UTF-8");
+	        	PrintWriter out = response.getWriter();
+	    	    	out.println("<script>alert('로그인이 필요한 서비스입니다.');</script>");
+	    		out.flush();
+	      		return "/login";
 		}
-			String referer=request.getHeader("REFERER");	
+			String referer=request.getHeader("REFERER");//이전 페이지 기억
 			if(referer==null||referer.contains("/login")) 
 				return "/login";
 			request.getSession().removeAttribute("need");
@@ -59,7 +59,7 @@ public class UserController {
 	
 	@RequestMapping(value="signup", method=RequestMethod.GET)
 	public String signupPage(Model model) {
-		if(!model.containsAttribute("user")) 
+		if(!model.containsAttribute("user")) //폼 검증
 			model.addAttribute("user",new User());
 		return "/signup";
 	}
@@ -78,11 +78,11 @@ public class UserController {
 		return "/login";
 	}
 	
-	@RequestMapping(value="/mypage" , method=RequestMethod.GET)
+	@RequestMapping(value="/mypage" , method=RequestMethod.GET) 
 	public String myPage(Model model,Principal pri,HttpServletRequest req) {
-			String nickname = uMapper.getNickname(pri.getName());
-			model.addAttribute("nickname",nickname);
-			System.out.println(req.getSession().getAttribute("isSuccess"));
+		String nickname = uMapper.getNickname(pri.getName());
+		model.addAttribute("nickname",nickname);
+			
 		return "/mypage";
 	}
 	
