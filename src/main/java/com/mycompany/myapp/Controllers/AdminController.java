@@ -30,6 +30,7 @@ public class AdminController {
 		return "/admin/admin";
 	}
 	
+	/////
 	@RequestMapping(value="/admin/userList" , method=RequestMethod.GET)
 	public String userList(@RequestParam(value="page" , defaultValue= "1" , required=false) int nowPage ,Model model) {
 		pageHelper pHelper = new pageHelper(pageMapper.getAllproduct(),nowPage);//페이징
@@ -44,14 +45,14 @@ public class AdminController {
 		return "/admin/userList";
 	}
 	@RequestMapping(value="/admin/userList/delete" , method=RequestMethod.GET)
-	public String deleteUser(@RequestParam(value="id") int id , @RequestParam("email") String email) {
+	public String deleteUser(@RequestParam(value="id") int id , @RequestParam("email") String email) { //유저 삭제
 		uMapper.deleteUser(id);
 		uMapper.deleteAuthorities(email);
 		System.out.println("Delete User email\n\t "+email+"\n\t id = "+id);
 		return "redirect:/admin/userList";
 	}
-	
-	@RequestMapping(value="/admin/userList/enabled")
+	////////상품관리
+	@RequestMapping(value="/admin/userList/enabled") // 계정 활성 및 비활성화
 	public String changeEnabled(@RequestParam("enabled")Boolean enabled,@RequestParam("id")int id) {
 		uMapper.changeEnabled(enabled, id);
 		return "redirect:/admin/userList";
@@ -71,7 +72,7 @@ public class AdminController {
 		return "/admin/productList";
 	}
 	
-	@RequestMapping("/admin/productList/delete")
+	@RequestMapping("/admin/productList/delete") //상품삭제
 	public String deleteProduct(@RequestParam int id) {
 		pMapper.deleteProduct(id);
 		return "redirect:/admin/productList";
