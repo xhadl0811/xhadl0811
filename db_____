@@ -1,0 +1,31 @@
+-----------user----------
+id serial primary key,
+email varchar(50) unique,
+nickname varchar(50),
+password varchar(100),
+enabled boolean not null
+
+------shop_authorities------
+    email varchar(50) not null,
+    authority varchar(50) not null
+
+
+-----------shop-----------
+id bigInt(20) unsigned not null auto_increment ,
+name varchar(220) not null,
+author varchar(150) not null,nickname varchar(150),
+price varchar(20) ,
+description varchar(2000) ,
+file1 varchar(200),
+file2 varchar(200),
+file3 varchar(200),
+category1 varchar(100),
+category2 varchar(100),
+category3 varchar(100),
+time varchar(100),
+see int(10) default 0,
+buyer varchar(120),
+isSelling boolean default true,
+primary key (id)
+
+
